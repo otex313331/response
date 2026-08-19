@@ -4,26 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Coverage Map</title>
-<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<link rel="stylesheet" href="style.css">
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;font-family:Arial,sans-serif;background:#fff}body{overflow:hidden}.map{position:fixed;inset:0;border:0;width:100%;height:100%}.bar{position:fixed;z-index:10;top:18px;left:18px;padding:12px 16px;border-radius:12px;background:rgba(255,255,255,.95);box-shadow:0 6px 24px rgba(0,0,0,.16);font-weight:700}
+</style>
 </head>
 <body>
-<div id="map"></div>
-<div class="topbar"><div class="brand">Coverage</div><div class="search"><input id="location" type="search" placeholder="Search location..." autocomplete="off"><button id="searchButton">Search</button></div></div>
-<div class="panel"><h2>Coverage</h2>
-<label class="layer"><input id="lteToggle" type="checkbox" checked><span class="swatch lte"></span><span>4G LTE</span></label>
-<label class="layer"><input id="fivegToggle" type="checkbox" checked><span class="swatch fiveg"></span><span>5G Nationwide</span></label>
-<label class="layer"><input id="cbandToggle" type="checkbox" checked><span class="swatch cband"></span><span>5G C-Band</span></label>
-<label class="layer"><input id="uwToggle" type="checkbox" checked><span class="swatch uw"></span><span>5G Ultra Wideband</span></label>
-<div class="status">Coverage layers are configured from the captured map style. The GIS source may still require its original Mapbox authorization.</div></div>
-<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-<script src="app.js"></script>
-<script>
-document.getElementById('searchButton').addEventListener('click',searchLocation);
-document.getElementById('lteToggle').addEventListener('change',e=>toggleLayer('coverage-lte',e.target.checked));
-document.getElementById('fivegToggle').addEventListener('change',e=>toggleLayer('coverage-5g',e.target.checked));
-document.getElementById('cbandToggle').addEventListener('change',e=>toggleLayer('coverage-cband',e.target.checked));
-document.getElementById('uwToggle').addEventListener('change',e=>toggleLayer('coverage-uw',e.target.checked));
-</script>
+<div class="bar">Coverage Map</div>
+<iframe class="map" title="Coverage map" src="https://gismaps.verizon.com/map4/?token=8ceFcItjbyMyDRHXrKYZY7iSlDqaOVy9HdrAYN9tTZ0sKQExZ6m1&amp;coverageType=datacoverage5g" loading="eager" allow="geolocation"></iframe>
 </body>
 </html>
