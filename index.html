@@ -12,10 +12,18 @@
 <div class="topbar"><div class="brand">Coverage</div><div class="search"><input id="location" type="search" placeholder="Search location..." autocomplete="off"><button id="searchButton">Search</button></div></div>
 <div class="panel"><h2>Coverage</h2>
 <label class="layer"><input id="lteToggle" type="checkbox" checked><span class="swatch lte"></span><span>4G LTE</span></label>
-<label class="layer"><input id="fivegToggle" type="checkbox" checked><span class="swatch fiveg"></span><span>5G</span></label>
+<label class="layer"><input id="fivegToggle" type="checkbox" checked><span class="swatch fiveg"></span><span>5G Nationwide</span></label>
+<label class="layer"><input id="cbandToggle" type="checkbox" checked><span class="swatch cband"></span><span>5G C-Band</span></label>
 <label class="layer"><input id="uwToggle" type="checkbox" checked><span class="swatch uw"></span><span>5G Ultra Wideband</span></label>
-<div class="status">Coverage layers are ready for authorized GIS sources.</div></div>
+<div class="status">Coverage layers are configured from the captured map style. The GIS source may still require its original Mapbox authorization.</div></div>
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script src="app.js"></script>
+<script>
+document.getElementById('searchButton').addEventListener('click',searchLocation);
+document.getElementById('lteToggle').addEventListener('change',e=>toggleLayer('coverage-lte',e.target.checked));
+document.getElementById('fivegToggle').addEventListener('change',e=>toggleLayer('coverage-5g',e.target.checked));
+document.getElementById('cbandToggle').addEventListener('change',e=>toggleLayer('coverage-cband',e.target.checked));
+document.getElementById('uwToggle').addEventListener('change',e=>toggleLayer('coverage-uw',e.target.checked));
+</script>
 </body>
 </html>
