@@ -5,24 +5,17 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Coverage Map</title>
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
-<style>
-*{box-sizing:border-box}html,body,#map{margin:0;width:100%;height:100%}body{font-family:Arial,sans-serif;overflow:hidden}.topbar{position:absolute;z-index:10;top:18px;left:18px;right:18px;display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:#fff;border-radius:14px;box-shadow:0 5px 25px #0002}.logo{font-size:21px;font-weight:700}.search{display:flex;gap:8px}.search input{width:260px;padding:10px 13px;border:1px solid #ddd;border-radius:9px;outline:0}.search button{padding:10px 15px;border:0;border-radius:9px;background:#111;color:#fff;cursor:pointer}.panel{position:absolute;z-index:10;left:18px;bottom:18px;width:290px;padding:20px;background:#fff;border-radius:15px;box-shadow:0 5px 25px #0002}.panel h3{margin:0 0 16px}.layer{display:flex;align-items:center;gap:10px;margin:13px 0;cursor:pointer}.swatch{width:18px;height:18px;border-radius:5px}.lte{background:#2563eb}.fiveg{background:#8b5cf6}.uw{background:#22c55e}.note{margin-top:16px;padding-top:14px;border-top:1px solid #eee;font-size:12px;color:#666}@media(max-width:700px){.topbar{top:10px;left:10px;right:10px;flex-direction:column;gap:10px}.search{width:100%}.search input{width:100%}.panel{left:10px;right:10px;bottom:10px;width:auto}}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div id="map"></div>
-<div class="topbar"><div class="logo">Coverage</div><div class="search"><input id="location" placeholder="Search location..."><button onclick="searchLocation()">Search</button></div></div>
-<div class="panel"><h3>Coverage</h3>
-<label class="layer"><input type="checkbox" checked onchange="toggleLayer('coverage-lte',this.checked)"><span class="swatch lte"></span>4G LTE</label>
-<label class="layer"><input type="checkbox" checked onchange="toggleLayer('coverage-5g',this.checked)"><span class="swatch fiveg"></span>5G</label>
-<label class="layer"><input type="checkbox" checked onchange="toggleLayer('coverage-uw',this.checked)"><span class="swatch uw"></span>5G Ultra Wideband</label>
-<div class="note">Coverage layers are placeholders until an authorized GIS source is connected.</div></div>
+<div class="topbar"><div class="brand">Coverage</div><div class="search"><input id="location" type="search" placeholder="Search location..." autocomplete="off"><button id="searchButton">Search</button></div></div>
+<div class="panel"><h2>Coverage</h2>
+<label class="layer"><input id="lteToggle" type="checkbox" checked><span class="swatch lte"></span><span>4G LTE</span></label>
+<label class="layer"><input id="fivegToggle" type="checkbox" checked><span class="swatch fiveg"></span><span>5G</span></label>
+<label class="layer"><input id="uwToggle" type="checkbox" checked><span class="swatch uw"></span><span>5G Ultra Wideband</span></label>
+<div class="status">Coverage layers are ready for authorized GIS sources.</div></div>
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-<script>
-const map=new maplibregl.Map({container:'map',style:{version:8,sources:{basemap:{type:'raster',tiles:['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],tileSize:256,attribution:'© OpenStreetMap contributors'}},layers:[{id:'basemap',type:'raster',source:'basemap'}]},center:[-83.22,42.31],zoom:8});
-map.addControl(new maplibregl.NavigationControl(),'bottom-right');
-function toggleLayer(id,visible){if(map.getLayer(id))map.setLayoutProperty(id,'visibility',visible?'visible':'none')}
-async function searchLocation(){const q=document.getElementById('location').value.trim();if(!q)return;try{const r=await fetch('https://nominatim.openstreetmap.org/search?format=json&q='+encodeURIComponent(q));const d=await r.json();if(!d.length)return alert('Location not found.');map.flyTo({center:[+d[0].lon,+d[0].lat],zoom:11})}catch(e){alert('Search failed.')}}
-</script>
+<script src="app.js"></script>
 </body>
 </html>
